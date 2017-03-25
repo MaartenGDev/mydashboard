@@ -5,7 +5,7 @@ class AboutPage extends React.Component {
         return (
             <section>
                 <h1>About</h1>
-                <p>My about page</p>
+                <p>My about page here!</p>
             </section>
         );
     }
