@@ -1,3 +1,5 @@
+import * as types from './actionTypes';
+
 export function createCollection(collection){
-    return {type: 'CREATE_COLLECTION', collection};
+    return {type: types.CREATE_COLLECTION, collection};
 }

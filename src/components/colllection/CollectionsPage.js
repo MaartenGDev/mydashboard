@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import * as collectionActions from '../../actions/collectionActions';
-
+import {bindActionCreators} from 'redux';
 class CollectionsPage extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -22,7 +22,7 @@ class CollectionsPage extends React.Component {
 
     onClickSave(){
         const { collection } = this.state;
-        this.props.dispatch(collectionActions.createCollection(collection));
+        this.props.actions.createCollection(collection);
     }
 
     collectionRow(collection, index){
@@ -54,8 +54,8 @@ class CollectionsPage extends React.Component {
 }
 
 CollectionsPage.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    collections: PropTypes.array.isRequired
+    collections: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps){
@@ -63,4 +63,11 @@ function mapStateToProps(state, ownProps){
         collections: state.collections
     };
 }
-export default connect(mapStateToProps)(CollectionsPage);
+
+function mapDispatchToProps(dispatch){
+  return {
+      actions: bindActionCreators(collectionActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CollectionsPage);
