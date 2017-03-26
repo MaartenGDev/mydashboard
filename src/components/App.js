@@ -8,7 +8,7 @@ import {
 import Home from './home/HomePage';
 import About from './about/AboutPage';
 import Header from './common/Header';
-import Integrations from './integration/IntegrationsPage';
+import Collection from './colllection/CollectionsPage';
 
 class App extends React.Component {
     render() {
@@ -19,7 +19,7 @@ class App extends React.Component {
 
                     <Route exact path="/" component={Home}/>
                     <Route path="/about" component={About}/>
-                    <Route path="/integrations" component={Integrations}/>
+                    <Route path="/collections" component={Collection}/>
                 </main>
             </Router>
         );
