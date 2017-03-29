@@ -1,29 +1,29 @@
 const express = require('express');
 const router = express.Router();
+import Collection from './../src/schemas/mongooseSchemas';
 
 router.get('/:Id', (req, res, next) => {
-    res.json([
-        {
-            title: 'hello',
-            columns: [
-                {
-                    title: 'Column 1'
-                },
-                {
-                    title: 'Column 2'
-                },
-                {
-                    title: 'Column #3'
-                }
-            ],
-            items: [
-                ['Value 1 Row 0', 'Value 2 Row 0', 'Value 3 Row 0'],
-                ['Value 1 Row 1', 'Value 2 Row 1', 'Value 3 Row 1'],
-                ['Value 1 Row 2', 'Value 2 Row 2', 'Value 3 Row 2'],
-                ['Value 1 Row 3', 'Value 2 Row 3', 'Value 3 Row 3']
-            ]
-        }
-    ]);
+    const {Id} = req.params;
+
+    Collection.findById(Id,(err, collection) => {
+       if(err) throw err;
+
+       return res.json(collection);
+    });
+});
+
+router.post('/', (req, res) => {
+    const {name, source} = req.body;
+
+    if (name === undefined || source === undefined) return res.json({error: 'Bad Request'});
+
+    let currentCollection = new Collection({name, source});
+
+    currentCollection.save((err, collection) => {
+        if (err) throw err;
+
+        res.json({status: 'OK', collection});
+    });
 });
 
 module.exports = router;

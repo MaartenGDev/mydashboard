@@ -8,7 +8,7 @@ import {
 import Home from './home/HomePage';
 import About from './about/AboutPage';
 import Header from './common/Header';
-import Collection from './colllection/CollectionsPage';
+import Collection from './collection/CollectionsPage';
 
 class App extends React.Component {
     render() {
