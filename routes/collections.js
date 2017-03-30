@@ -11,6 +11,11 @@ router.get('/:Id', (req, res, next) => {
        return res.json(collection);
     });
 });
+router.get('/', (req, res) => {
+    Collection.find((err, collections) => {
+        return res.json(collections);
+    })
+});
 
 router.post('/', (req, res) => {
     const {name, source} = req.body;

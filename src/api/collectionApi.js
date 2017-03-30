@@ -1,26 +1,33 @@
 import fetch from 'node-fetch';
 
-class collectionApi {
-    static saveCollection(collection) {
+const endpoint = 'http://localhost:3000';
+
+class CollectionApi {
+    static async saveCollection(collection) {
         collection = Object.assign({}, collection);
 
         const minCollectionTitleLength = 3;
 
-        return new Promise((res, rej) => {
-            if (collection.title.length < minCollectionTitleLength) {
-                rej(`Title must be at leat ${minCollectionTitleLength} characters.`);
-            }
+        if (collection.title.length < minCollectionTitleLength) {
+            throw Error('Failed title validation');
+        }
 
-            let formData = new FormData;
+        let formData = new FormData;
 
-            Object.keys(collection).forEach(key => {
-                formData.set(key, collection[key]);
-            });
-
-            fetch('/api/v1/collection', {method: 'post', body: formData})
-                .then(res => res.json())
-                .then(data => res(data))
-                .catch(err => rej(err));
+        Object.keys(collection).forEach(key => {
+            formData.set(key, collection[key]);
         });
+
+        const response = await fetch('/api/v1/collections', {method: 'post', body: formData});
+
+        return response.json();
+    }
+
+    static async find() {
+        const response = await fetch(`${endpoint}/api/v1/collections`);
+
+        return response.json();
     }
 }
+
+export default CollectionApi;

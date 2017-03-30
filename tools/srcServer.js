@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import promise from 'promise';
+import favicon from 'serve-favicon';
 
 mongoose.connect(`mongodb://localhost:27017/mydashboard`);
 
@@ -16,8 +17,22 @@ mongoose.Promise = promise;
 
 const port = 3000;
 const app = express();
-const collections = require('../routes/collections');
 
+// Database
+const collections = require('../routes/collections');
+app.use((req, res, next) => {
+    req._db = mongoose;
+    next();
+});
+
+
+// Express parsing
+app.disable('x-powered-by');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+// Webpack
 const compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
@@ -27,18 +42,10 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-
-app.use((req, res, next) => {
-    req._db = mongoose;
-    next();
-});
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// Routes
+app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')));
 
 app.use('/api/v1/collections', collections);
-
 
 app.get('*', (req, res)  => {
     res.sendFile(path.join( __dirname, '../src/index.html'));

@@ -9,13 +9,13 @@ class CollectionsPage extends React.Component {
     }
 
     collectionRow(collection, index){
-        return <li key={index}>{collection.title}</li>;
+        return <li key={index}>{collection.name}</li>;
     }
 
     render() {
         return (
             <section>
-                <h1>Collections test: {this.state.collection.title}</h1>
+                <h1>Collections</h1>
 
                 <ul>
                     {this.props.collections.map(this.collectionRow)}

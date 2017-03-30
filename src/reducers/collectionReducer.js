@@ -6,6 +6,10 @@ export default function collectionReducer(state = [], action) {
             return [...state,
                 Object.assign({}, action.collection)
             ];
+
+        case types.LOAD_COLLECTIONS_SUCCESS:
+            return action.collections;
+
         default:
             return state;
     }
