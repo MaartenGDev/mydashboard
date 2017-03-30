@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import * as collectionActions from '../../actions/collectionActions';
 import {bindActionCreators} from 'redux';
+import CollectionList from './CollectionList';
 
 class CollectionsPage extends React.Component {
     constructor(props, context) {
@@ -13,13 +14,12 @@ class CollectionsPage extends React.Component {
     }
 
     render() {
+        const {collections} = this.props;
+
         return (
             <section>
                 <h1>Collections</h1>
-
-                <ul>
-                    {this.props.collections.map(this.collectionRow)}
-                </ul>
+                <CollectionList collections={collections} />
             </section>
         );
     }
