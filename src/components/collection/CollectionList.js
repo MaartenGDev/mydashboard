@@ -2,10 +2,11 @@ import React, {PropTypes} from 'react';
 import CollectionListRow from './CollectionListRow';
 
 const CollectionList = ({collections}) => {
+    console.log(collections);
   return (
     <ul>
-        {collections.map(collection =>
-            <CollectionListRow key={collection._id} collection={collection}/>
+        {collections.map((collection, index) =>
+            <CollectionListRow key={index} collection={collection}/>
         )}
     </ul>
   );

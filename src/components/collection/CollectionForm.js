@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const CollectionForm = ({collection, allTypes, onSave, onChange, loading, errors}) => {
+const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, loading, errors}) => {
     return (
         <form>
             <TextInput
@@ -13,13 +13,13 @@ const CollectionForm = ({collection, allTypes, onSave, onChange, loading, errors
                 error={errors.name} />
 
             <SelectInput
-                name="typeId"
+                name="type"
                 label="Type"
-                value={collection.typeId}
+                value={collection.type}
                 defaultOption="Select Type"
-                options={allTypes}
+                options={allCollectionTypes}
                 onChange={onChange}
-                error={errors.typeId}/>
+                error={errors.type}/>
 
             <TextInput
                 name="source"
@@ -39,7 +39,7 @@ const CollectionForm = ({collection, allTypes, onSave, onChange, loading, errors
 
 CollectionForm.propTypes = {
     collection: PropTypes.object.isRequired,
-    allTypes: PropTypes.array.isRequired,
+    allCollectionTypes: PropTypes.array.isRequired,
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     loading: PropTypes.bool,

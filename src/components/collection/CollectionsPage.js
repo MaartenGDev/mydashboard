@@ -7,10 +7,12 @@ import CollectionList from './CollectionList';
 class CollectionsPage extends React.Component {
     constructor(props, context) {
         super(props, context);
+
+        this.redirectToAddCollectionPage = this.redirectToAddCollectionPage.bind(this);
     }
 
-    collectionRow(collection, index){
-        return <li key={index}>{collection.name}</li>;
+    redirectToAddCollectionPage(){
+        this.props.history.push('/collections/create');
     }
 
     render() {
@@ -20,6 +22,11 @@ class CollectionsPage extends React.Component {
             <section>
                 <h1>Collections</h1>
                 <CollectionList collections={collections} />
+
+                <input
+                    type="submit"
+                    value="Create Collection"
+                    onClick={this.redirectToAddCollectionPage} />
             </section>
         );
     }
@@ -27,7 +34,8 @@ class CollectionsPage extends React.Component {
 
 CollectionsPage.propTypes = {
     collections: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps){

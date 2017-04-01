@@ -20,7 +20,8 @@ class App extends React.Component {
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/about" component={About}/>
                     <Route exact path="/collections" component={CollectionsPage}/>
-                    <Route exact path="/collections/:id" component={ManageCollectionPage}/>
+                    <Route exact path="/collections/create" component={ManageCollectionPage}/>
+                    {/*<Route exact path="/collections/:id" component={ManageCollectionPage}/>*/}
                 </main>
             </Router>
         );

@@ -6,10 +6,10 @@ const typeSchema = mongoose.Schema({
     name: String
 });
 
-const Type = mongoose.model('Type', typeSchema);
+const CollectionType = mongoose.model('Type', typeSchema);
 const Collection = mongoose.model('Collection', collectionSchema);
 
 export {
-    Type,
+    CollectionType,
     Collection
 };

@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
-import {Type} from './../src/schemas/mongooseSchemas';
+import {CollectionType} from './../src/schemas/mongooseSchemas';
 
 router.get('/', (req, res) => {
-    Type.find((err, collections) => {
+    CollectionType.find((err, collections) => {
         return res.json(collections);
     });
 });
@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
 
     if (name === undefined) return res.json({error: 'Bad Request'});
 
-    let type = new Type({name});
+    let type = new CollectionType({name});
 
     type.save((err, type) => {
         if (err) throw err;

@@ -10,7 +10,7 @@ import promise from 'promise';
 import favicon from 'serve-favicon';
 
 import collections from '../routes/collections';
-import types from '../routes/types';
+import types from '../routes/collectionTypes';
 
 mongoose.connect(`mongodb://localhost:27017/mydashboard`);
 

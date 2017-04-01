@@ -3,30 +3,26 @@ import fetch from 'node-fetch';
 const endpoint = 'http://localhost:3000';
 
 class CollectionApi {
-    static async create(collection) {
+    static async store(collection) {
         collection = Object.assign({}, collection);
 
-        const minCollectionTitleLength = 3;
-
-        if (collection.title.length < minCollectionTitleLength) {
-            throw Error('Failed title validation');
-        }
-
-        let formData = new FormData;
-
-        Object.keys(collection).forEach(key => {
-            formData.set(key, collection[key]);
+        const response = await fetch(`${endpoint}/api/v1/collections`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(collection)
         });
 
-        const response = await fetch('/api/v1/collections', {method: 'post', body: formData});
+        await response.json();
 
-        return response.json();
+        return collection;
     }
 
     static async find() {
         const response = await fetch(`${endpoint}/api/v1/collections`);
 
-        return response.json();
+        return await response.json();
     }
 }
 

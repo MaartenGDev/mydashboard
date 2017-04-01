@@ -11,9 +11,7 @@ const SelectInput = ({name, label, onChange, defaultOption, value, error, option
                 onChange={onChange}>
 
                 {options.map(option => {
-                    let isSelected = option.value === defaultOption;
-
-                    return <option key={option.value} value={option.value} selected={isSelected}>{option.text}</option>;
+                    return <option key={option.value} value={option.value} defaultValue={defaultOption}>{option.text}</option>;
                 })}
 
                 {error && <div>Error: {error}</div>}
