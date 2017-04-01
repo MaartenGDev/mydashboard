@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 const endpoint = 'http://localhost:3000';
 
 class CollectionApi {
-    static async saveCollection(collection) {
+    static async create(collection) {
         collection = Object.assign({}, collection);
 
         const minCollectionTitleLength = 3;

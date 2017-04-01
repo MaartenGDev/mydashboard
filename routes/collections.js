@@ -1,28 +1,35 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-import Collection from './../src/schemas/mongooseSchemas';
+import {Collection} from './../src/schemas/mongooseSchemas';
 
 router.get('/:Id', (req, res, next) => {
     const {Id} = req.params;
 
-    Collection.findById(Id,(err, collection) => {
-       if(err) throw err;
+    Collection
+        .findById(Id)
+        .populate('type')
+        .exec((err, collection) => {
+            if (err) throw err;
 
-       return res.json(collection);
-    });
+            return res.json(collection);
+
+        });
 });
 router.get('/', (req, res) => {
-    Collection.find((err, collections) => {
-        return res.json(collections);
-    })
+    Collection
+        .find()
+        .populate('type')
+        .exec((err, collections) => {
+            return res.json(collections);
+        });
 });
 
 router.post('/', (req, res) => {
-    const {name, source} = req.body;
+    const {name, type, source} = req.body;
 
-    if (name === undefined || source === undefined) return res.json({error: 'Bad Request'});
+    if (name === undefined || type === undefined || source === undefined) return res.json({error: 'Bad Request'});
 
-    let currentCollection = new Collection({name, source});
+    let currentCollection = new Collection({name, type, source});
 
     currentCollection.save((err, collection) => {
         if (err) throw err;
@@ -31,4 +38,4 @@ router.post('/', (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

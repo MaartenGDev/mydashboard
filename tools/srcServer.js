@@ -9,6 +9,9 @@ import mongoose from 'mongoose';
 import promise from 'promise';
 import favicon from 'serve-favicon';
 
+import collections from '../routes/collections';
+import types from '../routes/types';
+
 mongoose.connect(`mongodb://localhost:27017/mydashboard`);
 
 mongoose.Promise = promise;
@@ -19,7 +22,7 @@ const port = 3000;
 const app = express();
 
 // Database
-const collections = require('../routes/collections');
+
 app.use((req, res, next) => {
     req._db = mongoose;
     next();
@@ -46,6 +49,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')));
 
 app.use('/api/v1/collections', collections);
+app.use('/api/v1/types', types);
 
 app.get('*', (req, res)  => {
     res.sendFile(path.join( __dirname, '../src/index.html'));

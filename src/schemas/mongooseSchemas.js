@@ -1,5 +1,15 @@
 import mongoose from 'mongoose';
 
-const collectionSchema = mongoose.Schema({id: Number, name: String, source: String});
+const collectionSchema = mongoose.Schema({name: String, type: {type: mongoose.Schema.ObjectId, ref: 'Type'}, source: String});
 
-export default mongoose.model('Collection', collectionSchema);
+const typeSchema = mongoose.Schema({
+    name: String
+});
+
+const Type = mongoose.model('Type', typeSchema);
+const Collection = mongoose.model('Collection', collectionSchema);
+
+export {
+    Type,
+    Collection
+};
