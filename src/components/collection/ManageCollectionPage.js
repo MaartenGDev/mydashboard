@@ -49,7 +49,8 @@ class ManageCollectionPage extends React.Component {
             .then(() => this.redirectToCollectionOverview())
             .catch(err => {
                 this.setState({saving: false});
-                console.log(err);
+
+                // TODO: Handle validation errors
             });
     }
 

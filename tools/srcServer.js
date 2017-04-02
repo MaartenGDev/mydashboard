@@ -47,6 +47,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 // Routes
 app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')));
+app.use(express.static('public'));
 
 app.use('/api/v1/collections', collections);
 app.use('/api/v1/types', types);

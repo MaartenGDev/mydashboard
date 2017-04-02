@@ -41,7 +41,7 @@ CollectionForm.propTypes = {
     allCollectionTypes: PropTypes.array.isRequired,
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    loading: PropTypes.bool,
+    saving: PropTypes.bool,
     errors: PropTypes.object
 };
 

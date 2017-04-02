@@ -4,12 +4,12 @@ import {Link, IndexLink} from 'react-router-dom';
 
 const Header = ({loading}) => {
     return (
-        <header>
+        <header className="header">
             <nav>
                 <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">About page</Link></li>
-                    <li><Link to="/collections">Collections</Link></li>
+                    <li className="header__item"><Link to="/">Home</Link></li>
+                    <li className="header__item"><Link to="/about">About page</Link></li>
+                    <li className="header__item"><Link to="/collections">Collections</Link></li>
 
                     {loading &&
                         <li>Loading...</li>

@@ -35,7 +35,7 @@ export function saveCollection(collection){
                 dispatch(updateCollectionSuccess(savedCourse)) :
                 dispatch(createCollectionSuccess(savedCourse));
         } catch (err) {
-            dispatch(fetchCallError(err))
+            dispatch(fetchCallError(err));
 
             throw err;
         }

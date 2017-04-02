@@ -8,6 +8,7 @@ import { loadCollectionTypes } from './actions/collectionTypeActions';
 
 import App from './components/App';
 
+
 const store = configureStore();
 store.dispatch(loadCollections());
 store.dispatch(loadCollectionTypes());
