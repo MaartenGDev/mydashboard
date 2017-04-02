@@ -14,8 +14,17 @@ class ManageCollectionPage extends React.Component {
         };
 
         this.updateCollectionState = this.updateCollectionState.bind(this);
-
         this.saveCollection = this.saveCollection.bind(this);
+        this.redirectToCollectionOverview = this.redirectToCollectionOverview.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.collection._id !== nextProps.collection._id){
+
+            this.setState({
+                collection: Object.assign({}, nextProps.collection),
+            });
+        }
     }
 
 
@@ -25,13 +34,19 @@ class ManageCollectionPage extends React.Component {
 
         collection[field] = target.value;
 
-        return this.setState({collection})
+        return this.setState({collection});
     }
 
     saveCollection(event) {
         event.preventDefault();
 
         this.props.actions.saveCollection(this.state.collection);
+
+        this.redirectToCollectionOverview();
+    }
+
+    redirectToCollectionOverview(){
+        this.props.history.push('/collections');
     }
 
     render() {
@@ -41,6 +56,7 @@ class ManageCollectionPage extends React.Component {
         return (
             <div>
                 <h1>Manage Collection</h1>
+
                 <CollectionForm
                     collection={collection}
                     allCollectionTypes={collectionTypes}
@@ -55,12 +71,27 @@ class ManageCollectionPage extends React.Component {
 ManageCollectionPage.propTypes = {
     collection: PropTypes.object.isRequired,
     collectionTypes: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
+function getCollectionById(collections, id) {
+    const collectionsWithSameId = collections.filter(collection => collection._id === id);
 
-    const collection = {id: '', name: '', type: "",source: ''};
+    if(collectionsWithSameId.length) return collectionsWithSameId[0];
+
+
+    return null;
+}
+
+function mapStateToProps(state, ownProps) {
+    const collectionId = ownProps.match.params.id;
+
+    let collection = {_id: '', name: '', type: {_id: ""},source: ''};
+
+    if(collectionId !== "create" && state.collections.length) {
+        collection = getCollectionById(state.collections, collectionId);
+    }
 
     const formattedCollectionTypes = state.collectionTypes.map(type => ({value: type._id, text: type.name}));
 

@@ -6,7 +6,7 @@ class CollectionApi {
     static async store(collection) {
         collection = Object.assign({}, collection);
 
-        const response = await fetch(`${endpoint}/api/v1/collections`, {
+        let response = await fetch(`${endpoint}/api/v1/collections`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -14,9 +14,9 @@ class CollectionApi {
             body: JSON.stringify(collection)
         });
 
-        await response.json();
+        response = await response.json();
 
-        return collection;
+        return response.collection;
     }
 
     static async find() {

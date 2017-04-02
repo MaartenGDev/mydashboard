@@ -8,14 +8,14 @@ const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, loadi
             <TextInput
                 name="name"
                 label="Name"
-                value={collection.title}
+                value={collection.name}
                 onChange={onChange}
                 error={errors.name} />
 
             <SelectInput
                 name="type"
                 label="Type"
-                value={collection.type}
+                value={collection.type._id}
                 defaultOption="Select Type"
                 options={allCollectionTypes}
                 onChange={onChange}
