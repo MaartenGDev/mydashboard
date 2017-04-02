@@ -1,4 +1,5 @@
 export default {
     collectionTypes: [],
-    collections: []
+    collections: [],
+    fetchCallsInProgress: 0
 };

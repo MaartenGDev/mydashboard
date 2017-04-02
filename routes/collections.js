@@ -15,6 +15,7 @@ router.get('/:Id', (req, res, next) => {
 
         });
 });
+
 router.get('/', (req, res) => {
     Collection
         .find()
@@ -22,6 +23,19 @@ router.get('/', (req, res) => {
         .exec((err, collections) => {
             return res.json(collections);
         });
+});
+
+router.patch('/:Id', (req, res) => {
+    const {Id} = req.params;
+    const {name, type, source} = req.body;
+
+    const collection = {name, type, source};
+
+    Collection.findOneAndUpdate({_id: Id}, collection, {upsert: true, new: true}, (err, collection) => {
+        if (err) throw err;
+
+        res.json({status: 'OK', collection});
+    });
 });
 
 router.post('/', (req, res) => {

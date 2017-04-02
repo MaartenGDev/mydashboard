@@ -10,7 +10,8 @@ class ManageCollectionPage extends React.Component {
 
         this.state = {
             collection: Object.assign({}, props.collection),
-            errors: {}
+            errors: {},
+            saving: false
         };
 
         this.updateCollectionState = this.updateCollectionState.bind(this);
@@ -19,7 +20,9 @@ class ManageCollectionPage extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.collection._id !== nextProps.collection._id){
+        const {collection} = this.props;
+
+        if (collection._id !== nextProps.collection._id || collection.type !== nextProps.collection.type) {
 
             this.setState({
                 collection: Object.assign({}, nextProps.collection),
@@ -28,7 +31,7 @@ class ManageCollectionPage extends React.Component {
     }
 
 
-    updateCollectionState({target}){
+    updateCollectionState({target}) {
         const field = target.name;
         let collection = this.state.collection;
 
@@ -40,17 +43,24 @@ class ManageCollectionPage extends React.Component {
     saveCollection(event) {
         event.preventDefault();
 
-        this.props.actions.saveCollection(this.state.collection);
+        this.setState({saving: true});
 
-        this.redirectToCollectionOverview();
+        this.props.actions.saveCollection(this.state.collection)
+            .then(() => this.redirectToCollectionOverview())
+            .catch(err => {
+                this.setState({saving: false});
+                console.log(err);
+            });
     }
 
-    redirectToCollectionOverview(){
+    redirectToCollectionOverview() {
+        this.setState({saving: false});
+
         this.props.history.push('/collections');
     }
 
     render() {
-        const {collection, errors} = this.state;
+        const {collection, errors, saving} = this.state;
         const {collectionTypes} = this.props;
 
         return (
@@ -62,7 +72,9 @@ class ManageCollectionPage extends React.Component {
                     allCollectionTypes={collectionTypes}
                     errors={errors}
                     onSave={this.saveCollection}
-                    onChange={this.updateCollectionState}/>
+                    onChange={this.updateCollectionState}
+                    saving={saving}
+                />
             </div>
         );
     }
@@ -78,22 +90,23 @@ ManageCollectionPage.propTypes = {
 function getCollectionById(collections, id) {
     const collectionsWithSameId = collections.filter(collection => collection._id === id);
 
-    if(collectionsWithSameId.length) return collectionsWithSameId[0];
+    if (collectionsWithSameId.length === 0) return;
 
-
-    return null;
+    return Object.assign({}, collectionsWithSameId[0]);
 }
 
 function mapStateToProps(state, ownProps) {
     const collectionId = ownProps.match.params.id;
 
-    let collection = {_id: '', name: '', type: {_id: ""},source: ''};
+    const formattedCollectionTypes = state.collectionTypes.map(type => ({value: type._id, text: type.name}));
 
-    if(collectionId !== "create" && state.collections.length) {
+    const defaultTypeId = formattedCollectionTypes.length ? formattedCollectionTypes[0].value : "";
+
+    let collection = {_id: '', name: '', type: {_id: defaultTypeId}, source: ''};
+
+    if (collectionId !== "create" && state.collections.length) {
         collection = getCollectionById(state.collections, collectionId);
     }
-
-    const formattedCollectionTypes = state.collectionTypes.map(type => ({value: type._id, text: type.name}));
 
     return {
         collection,

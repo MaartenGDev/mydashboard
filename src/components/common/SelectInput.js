@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-const SelectInput = ({name, label, onChange, defaultOption, value, error, options}) => {
+const SelectInput = ({name, label, onChange, value, error, options}) => {
     return (
         <div>
             <label htmlFor={name}>{label}</label>
@@ -11,7 +11,7 @@ const SelectInput = ({name, label, onChange, defaultOption, value, error, option
                 onChange={onChange}>
 
                 {options.map(option => {
-                    return <option key={option.value} value={option.value} defaultValue={defaultOption}>{option.text}</option>;
+                    return <option key={option.value} value={option.value}>{option.text}</option>;
                 })}
 
                 {error && <div>Error: {error}</div>}

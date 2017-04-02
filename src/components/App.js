@@ -1,9 +1,6 @@
-import React from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Link
-} from 'react-router-dom';
+import React, {PropTypes} from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import Home from './home/HomePage';
 import About from './about/AboutPage';
@@ -16,7 +13,7 @@ class App extends React.Component {
         return (
             <Router>
                 <main>
-                    <Header />
+                    <Header loading={this.props.loading}/>
                     <Route exact path="/" component={CollectionsPage}/>
                     <Route exact path="/about" component={About}/>
                     <Route exact path="/collections" component={CollectionsPage}/>
@@ -27,5 +24,13 @@ class App extends React.Component {
     }
 }
 
+App.propTypes = {
+    loading: PropTypes.bool.isRequired
+};
 
-export default App;
+function mapStateToProps(state, ownProps) {
+    return {
+        loading: state.fetchCallsInProgress > 0
+    };
+}
+export default connect(mapStateToProps)(App);

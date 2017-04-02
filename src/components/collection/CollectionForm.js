@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, loading, errors}) => {
+const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, saving, errors}) => {
     return (
         <form>
             <TextInput
@@ -14,9 +14,8 @@ const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, loadi
 
             <SelectInput
                 name="type"
-                label="Type"
+                label="Select Type"
                 value={collection.type._id}
-                defaultOption="Select Type"
                 options={allCollectionTypes}
                 onChange={onChange}
                 error={errors.type}/>
@@ -30,8 +29,8 @@ const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, loadi
 
             <input
                 type="submit"
-                disabled={loading}
-                value={loading ? 'Saving...' : 'Save'}
+                disabled={saving}
+                value={saving ? 'Saving...' : 'Save'}
                 onClick={onSave}/>
         </form>
     );
