@@ -5,15 +5,13 @@ import {Link, IndexLink} from 'react-router-dom';
 const Header = ({loading}) => {
     return (
         <header className="header">
-            <nav>
-                <ul>
-                    <li className="header__item"><Link to="/">Home</Link></li>
-                    <li className="header__item"><Link to="/about">About page</Link></li>
-                    <li className="header__item"><Link to="/collections">Collections</Link></li>
+            <nav className="nav">
+                <ul className="nav__list">
+                    <li className="nav__item"><Link className="nav__link" to="/">Home</Link></li>
+                    <li className="nav__item"><Link className="nav__link" to="/about">About page</Link></li>
+                    <li className="nav__item"><Link className="nav__link" to="/collections">Collections</Link></li>
 
-                    {loading &&
-                        <li>Loading...</li>
-                    }
+                    {loading && <li className="header__item">Loading...</li>}
                 </ul>
             </nav>
         </header>

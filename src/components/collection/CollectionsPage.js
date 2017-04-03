@@ -19,7 +19,7 @@ class CollectionsPage extends React.Component {
         const {collections} = this.props;
 
         return (
-            <section>
+            <section className="container container--fluid">
                 <h1>Collections</h1>
                 <CollectionList collections={collections} />
 

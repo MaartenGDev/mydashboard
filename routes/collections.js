@@ -1,6 +1,7 @@
 import express from 'express';
 const router = express.Router();
-import {Collection} from './../src/schemas/mongooseSchemas';
+import {Collection} from '../src/schemas/mongooseSchemas';
+import CollectionDataApi from '../src/api/CollectionDataApi';
 
 router.get('/:Id', (req, res, next) => {
     const {Id} = req.params;
@@ -21,7 +22,16 @@ router.get('/', (req, res) => {
         .find()
         .populate('type')
         .exec((err, collections) => {
-            return res.json(collections);
+            const populatedCollections = collections.map(function (collection) {
+                let currentCollection = Object.assign({}, collection);
+
+                currentCollection._doc.items = CollectionDataApi.getDataFromSource(collection.source);;
+
+                return currentCollection._doc;
+
+            });
+
+            res.json(populatedCollections);
         });
 });
 
