@@ -1,18 +1,21 @@
 import React, {PropTypes} from 'react';
 import Collection from './Collection';
 
-const CollectionList = ({collections}) => {
-  return (
-    <ul>
-        {collections.map((collection, index) =>
-            <Collection key={index} collection={collection}/>
-        )}
-    </ul>
-  );
+const CollectionList = ({collections, collectionTypes}) => {
+    return (
+        <ul>
+            {collections.map((collection, index) => {
+                let collectionType = collectionTypes.find(type => type._id === collection.type);
+
+                return <Collection key={index} collection={collection} collectionType={collectionType}/>;
+            })}
+        </ul>
+    );
 };
 
 CollectionList.propTypes = {
-    collections: PropTypes.array.isRequired
+    collections: PropTypes.array.isRequired,
+    collectionTypes: PropTypes.array.isRequired
 };
 
 export default CollectionList;

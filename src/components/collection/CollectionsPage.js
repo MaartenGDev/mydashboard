@@ -16,13 +16,12 @@ class CollectionsPage extends React.Component {
     }
 
     render() {
-        const {collections} = this.props;
+        const {collections, collectionTypes} = this.props;
 
         return (
             <section className="container container--fluid">
                 <h1>Collections</h1>
-                <CollectionList collections={collections} />
-
+                {collectionTypes.length && <CollectionList collections={collections} collectionTypes={collectionTypes}/>}
                 <input
                     type="submit"
                     value="Create Collection"
@@ -34,13 +33,15 @@ class CollectionsPage extends React.Component {
 
 CollectionsPage.propTypes = {
     collections: PropTypes.array.isRequired,
+    collectionTypes: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps){
     return {
-        collections: state.collections
+        collections: state.collections,
+        collectionTypes: state.collectionTypes
     };
 }
 

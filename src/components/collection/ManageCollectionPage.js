@@ -22,7 +22,7 @@ class ManageCollectionPage extends React.Component {
     componentWillReceiveProps(nextProps) {
         const {collection} = this.props;
 
-        if (collection._id !== nextProps.collection._id || collection.type !== nextProps.collection.type) {
+        if (collection._id !== nextProps.collection._id || collection.type._id !== nextProps.collection.type._id) {
 
             this.setState({
                 collection: Object.assign({}, nextProps.collection),
@@ -33,7 +33,7 @@ class ManageCollectionPage extends React.Component {
 
     updateCollectionState({target}) {
         const field = target.name;
-        let collection = this.state.collection;
+        let { collection } = this.state;
 
         collection[field] = target.value;
 
@@ -46,18 +46,19 @@ class ManageCollectionPage extends React.Component {
         this.setState({saving: true});
 
         this.props.actions.saveCollection(this.state.collection)
-            .then(() => this.redirectToCollectionOverview())
-            .catch(err => {
-                this.setState({saving: false});
+            .then(() => {
+                console.log('bier');
+                this.setState({saving: false})
 
-                // TODO: Handle validation errors
+                this.redirectToCollectionOverview();
             });
+        // TODO: Handle validation errors
     }
 
     redirectToCollectionOverview() {
         this.setState({saving: false});
 
-        this.props.history.push('/collections');
+        this.props.history.push('/');
     }
 
     render() {
@@ -103,7 +104,7 @@ function mapStateToProps(state, ownProps) {
 
     const defaultTypeId = formattedCollectionTypes.length ? formattedCollectionTypes[0].value : "";
 
-    let collection = {_id: '', name: '', type: {_id: defaultTypeId}, source: ''};
+    let collection = {_id: '', name: '', type: defaultTypeId, source: ''};
 
     if (collectionId !== "create" && state.collections.length) {
         collection = getCollectionById(state.collections, collectionId);

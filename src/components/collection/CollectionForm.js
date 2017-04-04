@@ -15,7 +15,7 @@ const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, savin
             <SelectInput
                 name="type"
                 label="Select Type"
-                value={collection.type._id}
+                value={collection.type}
                 options={allCollectionTypes}
                 onChange={onChange}
                 error={errors.type}/>

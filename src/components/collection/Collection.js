@@ -3,28 +3,32 @@ import {Link} from 'react-router-dom';
 import * as types from './collectionTypes';
 
 import TableCollection from './types/TableCollection';
+import CardCollection from './types/CardCollection';
 
-const Collection = ({collection}) => {
-    const items = collection.items.map(item => getComponentForCollectionType(collection.type._name, item));
+const Collection = ({collection, collectionType}) => {
+    const items = collection.items.map((item, index) => getComponentForCollectionType(index, collectionType.name, item));
 
     return (
         <section>
-            <h1> {collection.name}</h1>
+            <h1><Link to={"/collections/" + collection._id}>{collection.name}</Link></h1>
             {items}
         </section>
     );
 };
 
-function getComponentForCollectionType(type, collection) {
+function getComponentForCollectionType(key, type, collection) {
     const {title, description} = collection;
 
     if (type === types.COLLECTION_TYPE_TABLE) {
-        return <TableCollection title={title} description={description}/>
+        return <TableCollection key={key} title={title} description={description}/>
+    }else if(type === types.COLLECTION_TYPE_CARD){
+        return <CardCollection key={key} title={title} description={description}/>
     }
 }
 
 Collection.propTypes = {
-    collection: PropTypes.object.isRequired
+    collection: PropTypes.object.isRequired,
+    collectionType: PropTypes.object.isRequired
 };
 
 export default Collection;

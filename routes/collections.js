@@ -20,15 +20,12 @@ router.get('/:Id', (req, res, next) => {
 router.get('/', (req, res) => {
     Collection
         .find()
-        .populate('type')
+        .lean()
         .exec((err, collections) => {
-            const populatedCollections = collections.map(function (collection) {
-                let currentCollection = Object.assign({}, collection);
+            const populatedCollections = collections.map(collection => {
+                collection.items = CollectionDataApi.getDataFromSource(collection.source);
 
-                currentCollection._doc.items = CollectionDataApi.getDataFromSource(collection.source);;
-
-                return currentCollection._doc;
-
+                return collection;
             });
 
             res.json(populatedCollections);
