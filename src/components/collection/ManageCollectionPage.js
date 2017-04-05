@@ -47,7 +47,6 @@ class ManageCollectionPage extends React.Component {
 
         this.props.actions.saveCollection(this.state.collection)
             .then(() => {
-                console.log('bier');
                 this.setState({saving: false})
 
                 this.redirectToCollectionOverview();

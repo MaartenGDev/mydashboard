@@ -11,6 +11,7 @@ import favicon from 'serve-favicon';
 
 import collections from '../routes/collections';
 import types from '../routes/collectionTypes';
+import seeds from '../routes/seeds';
 
 mongoose.connect(`mongodb://localhost:27017/mydashboard`);
 
@@ -51,6 +52,7 @@ app.use(express.static('public'));
 
 app.use('/api/v1/collections', collections);
 app.use('/api/v1/types', types);
+app.use('/api/v1/seeds', seeds);
 
 app.get('*', (req, res)  => {
     res.sendFile(path.join( __dirname, '../src/index.html'));

@@ -3,13 +3,13 @@ import Collection from './Collection';
 
 const CollectionList = ({collections, collectionTypes}) => {
     return (
-        <ul>
+        <section>
             {collections.map((collection, index) => {
                 let collectionType = collectionTypes.find(type => type._id === collection.type);
 
                 return <Collection key={index} collection={collection} collectionType={collectionType}/>;
             })}
-        </ul>
+        </section>
     );
 };
 

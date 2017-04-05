@@ -3,32 +3,27 @@ const router = express.Router();
 import {Collection} from '../src/schemas/mongooseSchemas';
 import CollectionDataApi from '../src/api/CollectionDataApi';
 
-router.get('/:Id', (req, res, next) => {
-    const {Id} = req.params;
-
-    Collection
-        .findById(Id)
-        .populate('type')
-        .exec((err, collection) => {
-            if (err) throw err;
-
-            return res.json(collection);
-
-        });
-});
-
 router.get('/', (req, res) => {
     Collection
         .find()
         .lean()
         .exec((err, collections) => {
-            const populatedCollections = collections.map(collection => {
-                collection.items = CollectionDataApi.getDataFromSource(collection.source);
+            const populatedCollections = collections.map(function (collection) {
 
-                return collection;
+                return new Promise(resolve => {
+                    CollectionDataApi.getDataFromSource(collection.source).then(items => {
+                        collection.items = items;
+
+                        resolve(collection);
+                    });
+                });
+
+
             });
 
-            res.json(populatedCollections);
+            Promise.all(populatedCollections)
+                .then(collections => res.json(collections));
+
         });
 });
 

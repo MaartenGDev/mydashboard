@@ -20,8 +20,8 @@ class CollectionsPage extends React.Component {
 
         return (
             <section className="container container--fluid">
-                <h1>Collections</h1>
                 {collectionTypes.length && <CollectionList collections={collections} collectionTypes={collectionTypes}/>}
+
                 <input
                     type="submit"
                     value="Create Collection"
