@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import CollectionDataApi from './CollectionDataApi';
 
 const endpoint = 'http://localhost:3000';
 
@@ -19,7 +20,15 @@ class CollectionApi {
                 body: JSON.stringify(collection)
             })
                 .then(response => response.json())
-                .then(data => res(Object.assign({}, collection)));
+                .then(async () => {
+                    const items = await CollectionDataApi.getDataFromSource(collection.source);
+
+                    return res(
+                        Object.assign({},
+                        collection,
+                        {items})
+                    );
+                });
 
 
         });

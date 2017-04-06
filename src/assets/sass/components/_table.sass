@@ -1,0 +1,18 @@
+.table
+  width: 100%
+  @include box_shadow(1)
+
+  &__row:last-of-type &__column
+    border: none
+
+  &__column
+    text-align: left
+    border-collapse: collapse
+    padding: 10px
+    border-bottom: 1px solid #E2E2E2
+    color: #5C5C5C
+    font-size: 15px
+
+    &--header
+      border-bottom: 1px solid #FCFCFC
+      color: #9F9F9F

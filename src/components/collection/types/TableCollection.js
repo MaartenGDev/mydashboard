@@ -2,16 +2,16 @@ import React, {PropTypes} from 'react';
 
 const TableCollection = ({columns, rows}) => {
     return (
-        <table>
+        <table className="table">
             <thead>
-                <tr>
-                    {columns.map((column, index) => <th key={index}>{column.name}</th>)}
+                <tr className="table__row">
+                    {columns.map((column, index) => <th className="table__column table__column--header" key={index}>{column.name}</th>)}
                 </tr>
             </thead>
             <tbody>
                 {rows.map((row, index) => {
-                    return (<tr key={index}>{row.map((rowColumn, index) => {
-                        return <td key={index}>{rowColumn}</td>;
+                    return (<tr className="table__row" key={index}>{row.map((rowColumn, index) => {
+                        return <td className="table__column" key={index}>{rowColumn}</td>;
                     })}</tr>);
                 })}
             </tbody>
