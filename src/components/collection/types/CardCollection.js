@@ -2,14 +2,14 @@ import React, {PropTypes} from 'react';
 
 const CardCollection = ({title, description}) => {
     return (
-        <section className="card">
-            <section className="card__primary-title">
-                <h1 className="card__title">{title}</h1>
+        <section className="collection-card">
+            <section className="collection-card__primary-title">
+                <h1 className="collection-card__title">{title}</h1>
             </section>
-            <section className="card__supporting-text">
+            <section className="collection-card__supporting-text">
                 <p>{description}</p>
             </section>
-            <section className="card__actions">
+            <section className="collection-card__actions">
                 <a className="link link--material">Learn More</a>
             </section>
         </section>

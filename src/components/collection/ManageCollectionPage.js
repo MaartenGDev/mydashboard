@@ -65,8 +65,8 @@ class ManageCollectionPage extends React.Component {
         const {collectionTypes} = this.props;
 
         return (
-            <div>
-                <h1>Manage Collection</h1>
+            <section className="container container--offset card">
+                <h2 className="card__title">Manage Collection</h2>
 
                 <CollectionForm
                     collection={collection}
@@ -76,7 +76,7 @@ class ManageCollectionPage extends React.Component {
                     onChange={this.updateCollectionState}
                     saving={saving}
                 />
-            </div>
+            </section>
         );
     }
 }

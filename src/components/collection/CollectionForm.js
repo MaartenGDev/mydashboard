@@ -4,7 +4,7 @@ import SelectInput from '../common/SelectInput';
 
 const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, saving, errors}) => {
     return (
-        <form>
+        <form className="form">
             <TextInput
                 name="name"
                 label="Name"
