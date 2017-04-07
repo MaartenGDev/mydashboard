@@ -33,7 +33,7 @@ class ManageCollectionPage extends React.Component {
 
     updateCollectionState({target}) {
         const field = target.name;
-        let { collection } = this.state;
+        let {collection} = this.state;
 
         collection[field] = target.value;
 

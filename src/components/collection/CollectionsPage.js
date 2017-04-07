@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as collectionActions from '../../actions/collectionActions';
 import {bindActionCreators} from 'redux';
 import CollectionList from './CollectionList';
@@ -11,7 +11,7 @@ class CollectionsPage extends React.Component {
         this.redirectToAddCollectionPage = this.redirectToAddCollectionPage.bind(this);
     }
 
-    redirectToAddCollectionPage(){
+    redirectToAddCollectionPage() {
         this.props.history.push('/collections/create');
     }
 
@@ -19,13 +19,16 @@ class CollectionsPage extends React.Component {
         const {collections, collectionTypes} = this.props;
 
         return (
-            <section className="container container--fluid">
-                {collectionTypes.length && <CollectionList collections={collections} collectionTypes={collectionTypes}/>}
+            <section className="dashboard">
+                <section className="container container--fluid">
+                    {collectionTypes.length &&
+                    <CollectionList collections={collections} collectionTypes={collectionTypes}/>}
 
-                <input
-                    type="submit"
-                    value="Create Collection"
-                    onClick={this.redirectToAddCollectionPage} />
+                    <input
+                        type="submit"
+                        value="Create Collection"
+                        onClick={this.redirectToAddCollectionPage}/>
+                </section>
             </section>
         );
     }
@@ -38,17 +41,17 @@ CollectionsPage.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state, ownProps){
+function mapStateToProps(state, ownProps) {
     return {
         collections: state.collections,
         collectionTypes: state.collectionTypes
     };
 }
 
-function mapDispatchToProps(dispatch){
-  return {
-      actions: bindActionCreators(collectionActions, dispatch)
-  };
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(collectionActions, dispatch)
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CollectionsPage);

@@ -7,7 +7,7 @@ const CardCollection = ({title, description}) => {
                 <h1 className="collection-card__title">{title}</h1>
             </section>
             <section className="collection-card__supporting-text">
-                <p>{description}</p>
+                <p className="collection-card__text">{description}</p>
             </section>
             <section className="collection-card__actions">
                 <a className="link link--material">Learn More</a>

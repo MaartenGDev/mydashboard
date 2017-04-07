@@ -6,22 +6,28 @@ import TableCollection from './types/TableCollection';
 import CardCollection from './types/CardCollection';
 
 const Collection = ({collection, collectionType}) => {
-    const items = getComponentsForCollectionType(collectionType.name, collection);
+    const collectionTypeName = collectionType.name;
+
+    const items = getComponentsForCollectionType(collectionTypeName, collection);
 
     return (
-        <section className="collection">
-            <h1 className="collection__title"><Link className="collection__link" to={"/collections/" + collection._id}>{collection.name}</Link></h1>
-            {items}
+        <section className={`collection collection__type-${collectionTypeName}`}>
+            <h1 className="collection__title"><Link className="collection__link"
+                                                    to={"/collections/" + collection._id}>{collection.name}</Link></h1>
+
+            <section className={`collection__items collection__items--${collectionTypeName}`}>
+                {items}
+            </section>
         </section>
     );
 };
 
-function getComponentsForCollectionType( type, collection) {
+function getComponentsForCollectionType(type, collection) {
     if (type === types.COLLECTION_TYPE_TABLE) {
         const {columns, rows} = collection.items;
 
-        return  <TableCollection key={"Test"} columns={columns} rows={rows}/>
-    }else if(type === types.COLLECTION_TYPE_CARD){
+        return <TableCollection key={"Test"} columns={columns} rows={rows}/>
+    } else if (type === types.COLLECTION_TYPE_CARD) {
         const {items} = collection;
 
         return items.map((currentCollection, index) => {
