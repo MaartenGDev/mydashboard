@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import Chart from 'chart.js';
-import Colors from '../../../helpers/ColorGenerator';
+import Colors from '../../../../helpers/ColorGenerator';
 
 class ChartCollection extends React.Component {
     constructor(props){

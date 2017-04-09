@@ -18,7 +18,7 @@ export default function collectionReducer(state = initialState.collections, acti
             let updatedCollectionIndex = 0;
 
             collections.forEach((collection, index) => {
-                if(collection._id === action.collection._id){
+                if(collection.id === action.collection._id){
                     updatedCollectionIndex = index;
                 }
             });

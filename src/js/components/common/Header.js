@@ -8,9 +8,7 @@ const Header = ({loading}) => {
             <nav className="nav">
                 <ul className="nav__list">
                     <li className="nav__item"><Link className="nav__link" to="/">Home</Link></li>
-                    <li className="nav__item"><Link className="nav__link" to="/about">About page</Link></li>
-                    <li className="nav__item"><Link className="nav__link" to="/collections">Collections</Link></li>
-
+                    <li className="nav__item"><Link className="nav__link" to="/collections/create">Create Collection</Link></li>
                     {loading && <li className="header__item">Loading...</li>}
                 </ul>
             </nav>

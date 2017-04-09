@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, saving, errors}) => {
+const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, saving, buttonText, errors}) => {
     return (
         <form className="form">
             <TextInput
@@ -13,9 +13,9 @@ const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, savin
                 error={errors.name} />
 
             <SelectInput
-                name="type"
+                name="type_id"
                 label="Select Type"
-                value={collection.type}
+                value={collection.type_id}
                 options={allCollectionTypes}
                 onChange={onChange}
                 error={errors.type}/>
@@ -30,7 +30,8 @@ const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, savin
             <input
                 type="submit"
                 disabled={saving}
-                value={saving ? 'Saving...' : 'Save'}
+                value={buttonText}
+                className="form__button btn btn--flat"
                 onClick={onSave}/>
         </form>
     );
@@ -42,6 +43,7 @@ CollectionForm.propTypes = {
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     saving: PropTypes.bool,
+    buttonText: PropTypes.string.isRequired,
     errors: PropTypes.object
 };
 

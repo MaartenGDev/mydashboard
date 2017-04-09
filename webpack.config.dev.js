@@ -5,7 +5,7 @@ export default {
     devtool: 'cheap-module-eval-source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true', // Reloads the page if hot module reloading fails.
-        path.resolve(__dirname, 'src/index')
+        path.resolve(__dirname, 'src/js/index')
     ],
     target: 'web',
     output: {
@@ -14,7 +14,7 @@ export default {
         filename: 'bundle.js'
     },
     devServer: {
-        contentBase: path.resolve(__dirname, 'src'),
+        contentBase: path.resolve(__dirname, 'src/js'),
         noInfo: false,
         debug: true
     },

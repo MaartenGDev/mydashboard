@@ -1,4 +1,4 @@
-import collectionTypeApi from '../api/collectionTypeApi';
+import collectionTypeApi from '../../api/collectionTypeApi';
 import * as types from './actionTypes';
 import {beginFetchCall} from './fetchStatusActions';
 

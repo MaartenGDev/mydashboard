@@ -6,9 +6,9 @@ const endpoint = 'http://localhost:3000';
 class CollectionApi {
     static store(collection) {
         return new Promise((res, rej) => {
-            const isNewCollection = collection._id === "";
+            const isNewCollection = collection.id === "";
 
-            const route = isNewCollection ? `collections` : `collections/${collection._id}`;
+            const route = isNewCollection ? `collections` : `collections/${collection.id}`;
 
             const httpMethod = isNewCollection ? 'POST' : 'PATCH';
 

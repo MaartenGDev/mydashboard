@@ -1,25 +1,14 @@
 import express from 'express';
 const router = express.Router();
-import {CollectionType} from './../src/schemas/mongooseSchemas';
+import connection from '../src/database/Database';
 
 router.get('/', (req, res) => {
-    CollectionType.find((err, collections) => {
-        return res.json(collections);
+    connection.query('SELECT * from collection_types', (err, collectionTypes) => {
+        if(err) throw err;
+
+        return res.json(collectionTypes);
     });
 });
 
-router.post('/', (req, res) => {
-    const {name} = req.body;
-
-    if (name === undefined) return res.json({error: 'Bad Request'});
-
-    let type = new CollectionType({name});
-
-    type.save((err, type) => {
-        if (err) throw err;
-
-        res.json({status: 'OK', type});
-    });
-});
 
 export default router;

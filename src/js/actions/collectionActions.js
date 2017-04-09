@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import collectionApi from '../api/collectionApi';
+import collectionApi from '../../api/collectionApi';
 import {beginFetchCall, fetchCallError} from './fetchStatusActions';
 
 export function loadCollectionsSuccess(collections) {
@@ -29,9 +29,9 @@ export function saveCollection(collection) {
         dispatch(beginFetchCall());
 
         return collectionApi.store(collection).then(savedCollection => {
-            savedCollection._id ?
-                dispatch(updateCollectionSuccess(savedCollection)) :
-                dispatch(createCollectionSuccess(savedCollection));
+            collection.id === "" ?
+                dispatch(createCollectionSuccess(savedCollection)) :
+                dispatch(updateCollectionSuccess(savedCollection));
         });
 
     };

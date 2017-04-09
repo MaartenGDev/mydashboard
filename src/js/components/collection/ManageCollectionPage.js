@@ -22,7 +22,7 @@ class ManageCollectionPage extends React.Component {
     componentWillReceiveProps(nextProps) {
         const {collection} = this.props;
 
-        if (collection._id !== nextProps.collection._id || collection.type._id !== nextProps.collection.type._id) {
+        if (collection.id !== nextProps.collection.id || collection.type_id !== nextProps.collection.type_id) {
 
             this.setState({
                 collection: Object.assign({}, nextProps.collection),
@@ -34,8 +34,13 @@ class ManageCollectionPage extends React.Component {
     updateCollectionState({target}) {
         const field = target.name;
         let {collection} = this.state;
+        let value = target.value;
 
-        collection[field] = target.value;
+        if(field === 'type_id'){
+            value = parseInt(value);
+
+        }
+        collection[field] = value;
 
         return this.setState({collection});
     }
@@ -47,7 +52,7 @@ class ManageCollectionPage extends React.Component {
 
         this.props.actions.saveCollection(this.state.collection)
             .then(() => {
-                this.setState({saving: false})
+                this.setState({saving: false});
 
                 this.redirectToCollectionOverview();
             });
@@ -63,6 +68,8 @@ class ManageCollectionPage extends React.Component {
     render() {
         const {collection, errors, saving} = this.state;
         const {collectionTypes} = this.props;
+        const isNewCollection = collection.id === "";
+
 
         return (
             <section className="container container--offset card">
@@ -75,6 +82,7 @@ class ManageCollectionPage extends React.Component {
                     onSave={this.saveCollection}
                     onChange={this.updateCollectionState}
                     saving={saving}
+                    buttonText={isNewCollection ? "Create" : "Update"}
                 />
             </section>
         );
@@ -89,7 +97,7 @@ ManageCollectionPage.propTypes = {
 };
 
 function getCollectionById(collections, id) {
-    const collectionsWithSameId = collections.filter(collection => collection._id === id);
+    const collectionsWithSameId = collections.filter(collection => collection.id === parseInt(id));
 
     if (collectionsWithSameId.length === 0) return;
 
@@ -99,11 +107,11 @@ function getCollectionById(collections, id) {
 function mapStateToProps(state, ownProps) {
     const collectionId = ownProps.match.params.id;
 
-    const formattedCollectionTypes = state.collectionTypes.map(type => ({value: type._id, text: type.name}));
+    const formattedCollectionTypes = state.collectionTypes.map(type => ({value: type.id, text: type.name}));
 
-    const defaultTypeId = formattedCollectionTypes.length ? formattedCollectionTypes[0].value : "";
+    const defaultTypeId = formattedCollectionTypes.length ? formattedCollectionTypes[0].value : 0;
 
-    let collection = {_id: '', name: '', type: defaultTypeId, source: ''};
+    let collection = {id: '', name: '', type_id: defaultTypeId, source: ''};
 
     if (collectionId !== "create" && state.collections.length) {
         collection = getCollectionById(state.collections, collectionId);

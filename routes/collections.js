@@ -1,56 +1,59 @@
 import express from 'express';
 const router = express.Router();
+import connection from '../src/database/Database';
+
 import {Collection} from '../src/schemas/mongooseSchemas';
 import CollectionDataApi from '../src/api/CollectionDataApi';
 
+
 router.get('/', (req, res) => {
-    Collection
-        .find()
-        .lean()
-        .exec((err, collections) => {
-            const populatedCollections = collections.map(function (collection) {
+    connection.query('SELECT * from collections', (error, collections) => {
+        if (error) throw error;
 
-                return new Promise(resolve => {
-                    CollectionDataApi.getDataFromSource(collection.source).then(items => {
-                        collection.items = items;
+        const populatedCollections = collections.map(collection => {
+            return new Promise(resolve => {
+                CollectionDataApi.getDataFromSource(collection.source).then(items => {
+                    collection.items = items;
 
-                        resolve(collection);
-                    });
+                    resolve(collection);
                 });
-
-
             });
-
-            Promise.all(populatedCollections)
-                .then(collections => res.json(collections));
-
         });
+
+        Promise.all(populatedCollections)
+            .then(collections => res.json(collections));
+    });
 });
 
-router.patch('/:Id', (req, res) => {
-    const {Id} = req.params;
-    const {name, type, source} = req.body;
+router.patch('/:id', (req, res) => {
+    const {id} = req.params;
+    const {name, type_id, source} = req.body;
+    const userId = req._user.id;
 
-    const collection = {name, type, source};
+    const collection = {id, name, type_id, source};
 
-    Collection.findOneAndUpdate({_id: Id}, collection, {upsert: true, new: true}, (err, collection) => {
+    connection.query('UPDATE collections SET name=?, type_id=?, source=? WHERE id=? AND user_id=?', [name, type_id, source, id, userId], (err, rows, fields) => {
         if (err) throw err;
 
-        res.json({status: 'OK', collection});
+        res.send(collection);
     });
 });
 
 router.post('/', (req, res) => {
-    const {name, type, source} = req.body;
+    const {name, type_id, source} = req.body;
+    const userId = req._user.id;
 
-    if (name === undefined || type === undefined || source === undefined) return res.json({error: 'Bad Request'});
+    if (name === undefined || type_id === undefined || source === undefined) return res.json({error: 'Bad Request'});
 
-    let currentCollection = new Collection({name, type, source});
+    let collection = {name, type_id, source};
 
-    currentCollection.save((err, collection) => {
+
+    connection.query('INSERT INTO collections (name, type_id, source, user_id) VALUES(?,?,?,?)', [name, type_id, source, userId], (err, results, fields) => {
         if (err) throw err;
 
-        res.json({status: 'OK', collection});
+        collection.id = results.insertId;
+
+        res.send(collection);
     });
 });
 

@@ -3,32 +3,25 @@ import {connect} from 'react-redux';
 import * as collectionActions from '../../actions/collectionActions';
 import {bindActionCreators} from 'redux';
 import CollectionList from './CollectionList';
+import NoCollectionsFound from './NoCollectionsFound';
 
 class CollectionsPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-
-        this.redirectToAddCollectionPage = this.redirectToAddCollectionPage.bind(this);
-    }
-
-    redirectToAddCollectionPage() {
-        this.props.history.push('/collections/create');
     }
 
     render() {
         const {collections, collectionTypes} = this.props;
 
+        const hasCollections = collections.length > 0 &&  collectionTypes.length > 0;
+
         return (
             <section className="dashboard">
-                <section className="container container--fluid">
-                    {collectionTypes.length &&
-                    <CollectionList collections={collections} collectionTypes={collectionTypes}/>}
-
-                    <input
-                        type="submit"
-                        value="Create Collection"
-                        onClick={this.redirectToAddCollectionPage}/>
-                </section>
+                {hasCollections ?
+                    <section className="container container--fluid">
+                       <CollectionList collections={collections} collectionTypes={collectionTypes}/>
+                    </section>
+                : <NoCollectionsFound/>}
             </section>
         );
     }

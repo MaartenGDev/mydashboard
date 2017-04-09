@@ -13,8 +13,9 @@ const Collection = ({collection, collectionType}) => {
 
     return (
         <section className={`collection collection__type-${collectionTypeName}`}>
-            <h1 className="collection__title"><Link className="collection__link"
-                                                    to={"/collections/" + collection._id}>{collection.name}</Link></h1>
+            <h1 className="collection__title">
+                <Link className="collection__link" to={"/collections/" + collection.id}>{collection.name}</Link>
+            </h1>
 
             <section className={`collection__items collection__items--${collectionTypeName}`}>
                 {items}

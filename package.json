@@ -11,7 +11,8 @@
     "test": "mocha --reporter progress tools/testSetup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch",
     "sass": "node-sass src/assets/sass/app.sass public/css/app.css",
-    "sass:watch": "npm run sass -- --watch"
+    "sass:watch": "npm run sass -- --watch",
+    "db:migrate": "babel-node src/database/runMigrations"
   },
   "main": "index.js",
   "repository": {
@@ -25,8 +26,10 @@
     "body-parser": "^1.17.1",
     "chart.js": "^2.5.0",
     "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
     "form-data": "^2.1.2",
     "mongoose": "^4.9.2",
+    "mysql": "^2.13.0",
     "node-fetch": "^1.6.3",
     "node-noop": "^1.0.0",
     "promise": "^7.1.1",

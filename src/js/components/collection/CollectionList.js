@@ -5,7 +5,7 @@ const CollectionList = ({collections, collectionTypes}) => {
     return (
         <section>
             {collections.map((collection, index) => {
-                let collectionType = collectionTypes.find(type => type._id === collection.type);
+                let collectionType = collectionTypes.find(type => type.id === collection.type_id);
 
                 return <Collection key={index} collection={collection} collectionType={collectionType}/>;
             })}
