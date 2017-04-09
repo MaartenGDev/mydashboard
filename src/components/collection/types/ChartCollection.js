@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import Chart from 'chart.js';
+import Colors from '../../../helpers/ColorGenerator';
 
 class ChartCollection extends React.Component {
     constructor(props){
@@ -8,6 +9,8 @@ class ChartCollection extends React.Component {
     componentDidMount(){
         const {labels, data} = this.props;
 
+        const {light, dark} = Colors.generate(data.length, true);
+
         let canvas = this.refs.chart;
 
         let chartData = {
@@ -15,7 +18,10 @@ class ChartCollection extends React.Component {
             datasets: [
                 {
                     label: 'My Title',
-                    data
+                    data,
+                    backgroundColor: light,
+                    borderColor: dark,
+                    borderWidth: 1,
                 }
             ]
         };
@@ -23,13 +29,17 @@ class ChartCollection extends React.Component {
         const myBarChart = new Chart(canvas, {
             type: 'bar',
             data: chartData,
-            options: {}
+            options: {
+                maintainAspectRatio: false
+            }
         });
     }
     render() {
-        return (<section className="collection-chart card">
-            <canvas ref={'chart'} height={'300'} width={'300'} />
-        </section>);
+        return (
+            <section className="collection-chart card">
+            <canvas ref={'chart'} height={'300'} />
+        </section>
+        );
     }
 }
 
