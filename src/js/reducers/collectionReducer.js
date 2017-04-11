@@ -15,13 +15,8 @@ export default function collectionReducer(state = initialState.collections, acti
 
         case types.UPDATE_COLLECTION_SUCCESS: {
             let collections = [...state];
-            let updatedCollectionIndex = 0;
 
-            collections.forEach((collection, index) => {
-                if(collection.id === action.collection._id){
-                    updatedCollectionIndex = index;
-                }
-            });
+            const updatedCollectionIndex = collections.findIndex(collection => collection.id === action.collection.id);
 
             collections[updatedCollectionIndex] = Object.assign({}, action.collection);
 

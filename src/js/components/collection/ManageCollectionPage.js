@@ -23,7 +23,6 @@ class ManageCollectionPage extends React.Component {
         const {collection} = this.props;
 
         if (collection.id !== nextProps.collection.id || collection.type_id !== nextProps.collection.type_id) {
-
             this.setState({
                 collection: Object.assign({}, nextProps.collection),
             });

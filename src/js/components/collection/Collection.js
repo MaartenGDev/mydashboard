@@ -28,7 +28,7 @@ function getComponentsForCollectionType(type, collection) {
     if (type === types.COLLECTION_TYPE_TABLE) {
         const {columns, rows} = collection.items;
 
-        return <TableCollection columns={columns} rows={rows}/>;
+        return <TableCollection columns={columns} rows={rows} />;
     } else if (type === types.COLLECTION_TYPE_CHART) {
         const { labels, data } = collection.items;
 

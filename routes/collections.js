@@ -47,7 +47,6 @@ router.post('/', (req, res) => {
 
     let collection = {name, type_id, source};
 
-
     connection.query('INSERT INTO collections (name, type_id, source, user_id) VALUES(?,?,?,?)', [name, type_id, source, userId], (err, results, fields) => {
         if (err) throw err;
 

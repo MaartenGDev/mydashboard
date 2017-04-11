@@ -20,13 +20,13 @@ class CollectionApi {
                 body: JSON.stringify(collection)
             })
                 .then(response => response.json())
-                .then(async () => {
-                    const items = await CollectionDataApi.getDataFromSource(collection.source);
+                .then(async (updatedCollection) => {
+                    const items = await CollectionDataApi.getDataFromSource(updatedCollection.source);
 
                     return res(
                         Object.assign({},
                         collection,
-                        {items})
+                        {items, id: updatedCollection.id})
                     );
                 });
 
