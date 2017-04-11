@@ -25,7 +25,6 @@ export function loadCollections() {
 
 export function saveCollection(collection) {
     return async function (dispatch, getState) {
-
         dispatch(beginFetchCall());
 
         return collectionApi.store(collection).then(savedCollection => {

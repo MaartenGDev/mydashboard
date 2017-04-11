@@ -22,7 +22,7 @@ class ManageCollectionPage extends React.Component {
     componentWillReceiveProps(nextProps) {
         const {collection} = this.props;
 
-        if (collection.id !== nextProps.collection.id || collection.type_id !== nextProps.collection.type_id) {
+        if (collection.name !== nextProps.collection.name || collection.id !== nextProps.collection.id || collection.type_id !== nextProps.collection.type_id) {
             this.setState({
                 collection: Object.assign({}, nextProps.collection),
             });
@@ -37,7 +37,6 @@ class ManageCollectionPage extends React.Component {
 
         if(field === 'type_id'){
             value = parseInt(value);
-
         }
         collection[field] = value;
 
@@ -96,7 +95,7 @@ ManageCollectionPage.propTypes = {
 };
 
 function getCollectionById(collections, id) {
-    const collectionsWithSameId = collections.filter(collection => collection.id === parseInt(id));
+    const collectionsWithSameId = collections.filter(collection => collection.id === id);
 
     if (collectionsWithSameId.length === 0) return;
 
@@ -104,11 +103,11 @@ function getCollectionById(collections, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-    const collectionId = ownProps.match.params.id;
+    const collectionId = parseInt(ownProps.match.params.id);
 
-    const formattedCollectionTypes = state.collectionTypes.map(type => ({value: type.id, text: type.name}));
+    const collectionTypes = state.collectionTypes;
 
-    const defaultTypeId = formattedCollectionTypes.length ? formattedCollectionTypes[0].value : 0;
+    const defaultTypeId = collectionTypes.length ? collectionTypes[0].id : 0;
 
     let collection = {id: '', name: '', type_id: defaultTypeId, source: ''};
 
@@ -118,7 +117,7 @@ function mapStateToProps(state, ownProps) {
 
     return {
         collection,
-        collectionTypes: formattedCollectionTypes
+        collectionTypes
     };
 }
 

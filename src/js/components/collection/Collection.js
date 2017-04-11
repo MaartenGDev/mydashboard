@@ -4,7 +4,7 @@ import * as types from './collectionTypes';
 
 import TableCollection from './types/TableCollection';
 import CardCollection from './types/CardCollection';
-import ChartCollection from './types/ChartCollection';
+import {Bar, Line} from './types/charts/Charts';
 
 const Collection = ({collection, collectionType}) => {
     const collectionTypeName = collectionType.name;
@@ -29,11 +29,14 @@ function getComponentsForCollectionType(type, collection) {
         const {columns, rows} = collection.items;
 
         return <TableCollection columns={columns} rows={rows} />;
-    } else if (type === types.COLLECTION_TYPE_CHART) {
+    } else if (type === types.COLLECTION_TYPE_CHARTS_BAR) {
         const { labels, data } = collection.items;
 
-        return <ChartCollection labels={labels} data={data} />;
+        return <Bar labels={labels} data={data} />;
+    } else if (type === types.COLLECTION_TYPE_CHARTS_LINE) {
+        const { labels, data } = collection.items;
 
+        return <Line labels={labels} data={data} />;
     } else if (type === types.COLLECTION_TYPE_CARD) {
         const {items} = collection;
 

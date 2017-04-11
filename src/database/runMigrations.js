@@ -14,6 +14,9 @@ fs.readdir(migrationsPath, (err, files) => {
 
         const migration = require(path.join(migrationsPath, file))();
 
+
+        /* eslint-disable no-console */
+
         console.log(`Migrated: ${file}`);
     });
 

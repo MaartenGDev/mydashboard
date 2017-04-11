@@ -9,4 +9,4 @@ module.exports = () => {
             FOREIGN KEY (category_id) REFERENCES type_categories(id)
            );`
         );
-    }
+};

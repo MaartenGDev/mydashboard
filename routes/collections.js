@@ -26,11 +26,11 @@ router.get('/', (req, res) => {
 });
 
 router.patch('/:id', (req, res) => {
-    const {id} = req.params;
+    let {id} = req.params;
     const {name, type_id, source} = req.body;
     const userId = req._user.id;
 
-    const collection = {id, name, type_id, source};
+    const collection = {id: parseInt(id), name, type_id, source};
 
     connection.query('UPDATE collections SET name=?, type_id=?, source=? WHERE id=? AND user_id=?', [name, type_id, source, id, userId], (err, rows, fields) => {
         if (err) throw err;

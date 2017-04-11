@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
 import Chart from 'chart.js';
-import Colors from '../../../../helpers/ColorGenerator';
+import Colors from '../../../../../helpers/ColorGenerator';
 
-class ChartCollection extends React.Component {
+class ChartHOC extends React.Component {
     constructor(props){
         super(props);
     }
     componentDidMount(){
-        const {labels, data} = this.props;
+        const {type, labels, data} = this.props;
 
         const {light, dark} = Colors.generate(data.length, true);
 
@@ -26,8 +26,8 @@ class ChartCollection extends React.Component {
             ]
         };
 
-        const myBarChart = new Chart(canvas, {
-            type: 'line',
+       new Chart(canvas, {
+            type: type,
             data: chartData,
             options: {
                 maintainAspectRatio: false
@@ -37,15 +37,15 @@ class ChartCollection extends React.Component {
     render() {
         return (
             <section className="collection-chart card">
-            <canvas ref={'chart'} height={'300'} />
-        </section>
+                <canvas ref={'chart'} height={'300'} />
+            </section>
         );
     }
 }
 
-ChartCollection.propTypes = {
+Chart.propTypes = {
     labels: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired
 };
 
-export default ChartCollection;
+export default ChartHOC;

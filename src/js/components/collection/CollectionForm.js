@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
-import SelectInput from '../common/SelectInput';
+import NestedSelectInput from '../common/NestedSelectInput';
 
 const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, saving, buttonText, errors}) => {
     return (
@@ -12,7 +12,7 @@ const CollectionForm = ({collection, allCollectionTypes, onSave, onChange, savin
                 onChange={onChange}
                 error={errors.name} />
 
-            <SelectInput
+            <NestedSelectInput
                 name="type_id"
                 label="Select Type"
                 value={collection.type_id}
