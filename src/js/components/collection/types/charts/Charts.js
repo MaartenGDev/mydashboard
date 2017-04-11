@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
-import Chart from './ChartHOC.js';
+import Chart from './ChartHOC';
 
 const Bar = ({labels, data}) => {
-  return <Chart type="bar" labels={labels} data={data}/>
+  return <Chart type="bar" labels={labels} data={data}/>;
 };
 
 Bar.propTypes = {
@@ -12,7 +12,7 @@ Bar.propTypes = {
 
 
 const Line = ({labels, data}) => {
-  return <Chart type="line" labels={labels} data={data}/>
+  return <Chart type="line" labels={labels} data={data}/>;
 };
 
 Line.propTypes = {

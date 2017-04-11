@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-const CardCollection = ({title, description}) => {
+const TextCard = ({title, description}) => {
     return (
         <section className="collection-card">
             <section className="collection-card__primary-title">
@@ -16,9 +16,9 @@ const CardCollection = ({title, description}) => {
     );
 };
 
-CardCollection.propTypes = {
+TextCard.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired
 };
 
-export default CardCollection;
+export default TextCard;

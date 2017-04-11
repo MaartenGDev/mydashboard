@@ -3,7 +3,10 @@ import {Link} from 'react-router-dom';
 import * as types from './collectionTypes';
 
 import TableCollection from './types/TableCollection';
-import CardCollection from './types/CardCollection';
+
+import TextCard from './types/cards/TextCard';
+import ImageCard from './types/cards/ImageCard';
+
 import {Bar, Line} from './types/charts/Charts';
 
 const Collection = ({collection, collectionType}) => {
@@ -11,13 +14,16 @@ const Collection = ({collection, collectionType}) => {
 
     const items = getComponentsForCollectionType(collectionTypeName, collection);
 
+    const containerClass = `collection collection__type-${collectionTypeName}`;
+    const itemWrapperClass = `collection__items collection__items--${collectionTypeName}`;
+
     return (
-        <section className={`collection collection__type-${collectionTypeName}`}>
+        <section className={containerClass}>
             <h1 className="collection__title">
                 <Link className="collection__link" to={"/collections/" + collection.id}>{collection.name}</Link>
             </h1>
 
-            <section className={`collection__items collection__items--${collectionTypeName}`}>
+            <section className={itemWrapperClass}>
                 {items}
             </section>
         </section>
@@ -37,13 +43,21 @@ function getComponentsForCollectionType(type, collection) {
         const { labels, data } = collection.items;
 
         return <Line labels={labels} data={data} />;
-    } else if (type === types.COLLECTION_TYPE_CARD) {
+    } else if (type === types.COLLECTION_TYPE_CARDS_TEXT) {
         const {items} = collection;
 
         return items.map((currentCollection, index) => {
             const {title, description} = currentCollection;
 
-            return <CardCollection key={index} title={title} description={description}/>;
+            return <TextCard key={index} title={title} description={description}/>;
+        });
+    } else if (type === types.COLLECTION_TYPE_CARDS_IMAGE) {
+        const {items} = collection;
+
+        return items.map((currentCollection, index) => {
+            const {title, description} = currentCollection;
+
+            return <ImageCard key={index} title={title} description={description}/>;
         });
     }
 }

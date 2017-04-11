@@ -31,7 +31,7 @@ const NestedSelectInput = ({name, label, onChange, value, error, options}) => {
                     return (
                         <optgroup key={index} label={category.name}>
                             {category.items.map((option, index) => <option value={option.id} key={index}>{option.name}</option>)}
-                        </optgroup>)
+                        </optgroup>);
                 })};
 
                 {error && <div>Error: {error}</div>}

@@ -101,7 +101,9 @@ body {
   .collection__link {
     text-decoration: none;
     color: #212121; }
-  .collection__items--card {
+  .collection__items--text-card {
+    display: flex; }
+  .collection__items--image-card {
     display: flex; }
 
 .collection-card {

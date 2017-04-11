@@ -43,7 +43,8 @@ class ChartHOC extends React.Component {
     }
 }
 
-Chart.propTypes = {
+ChartHOC.propTypes = {
+    type: PropTypes.string.isRequired,
     labels: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired
 };
