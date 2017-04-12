@@ -101,9 +101,7 @@ body {
   .collection__link {
     text-decoration: none;
     color: #212121; }
-  .collection__items--text-card {
-    display: flex; }
-  .collection__items--image-card {
+  .collection__items--card {
     display: flex; }
 
 .collection-card {
@@ -111,14 +109,25 @@ body {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 5px;
   margin-right: 15px;
-  width: 15%;
+  width: calc(100% / 6);
   background-color: #ffffff;
   position: relative; }
+  .collection-card__image-wrapper {
+    position: relative;
+    overflow: hidden; }
+  .collection-card__image {
+    width: 100%;
+    max-height: 150px; }
   .collection-card__title {
     margin: 0;
     padding: 0;
     font-size: 22px;
     font-weight: 300; }
+    .collection-card__title--overlay {
+      bottom: 0;
+      position: absolute;
+      color: white;
+      margin: 0 0 15px 15px; }
   .collection-card__primary-title {
     margin: 24px 16px 16px 16px; }
   .collection-card__supporting-text {

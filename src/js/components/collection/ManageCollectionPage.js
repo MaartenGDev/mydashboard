@@ -103,7 +103,7 @@ function getCollectionById(collections, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-    const collectionId = parseInt(ownProps.match.params.id);
+    const collectionId = ownProps.match.params.id;
 
     const collectionTypes = state.collectionTypes;
 
@@ -112,7 +112,7 @@ function mapStateToProps(state, ownProps) {
     let collection = {id: '', name: '', type_id: defaultTypeId, source: ''};
 
     if (collectionId !== "create" && state.collections.length) {
-        collection = getCollectionById(state.collections, collectionId);
+        collection = getCollectionById(state.collections, parseInt(collectionId));
     }
 
     return {

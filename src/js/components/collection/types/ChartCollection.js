@@ -26,7 +26,7 @@ class ChartCollection extends React.Component {
             ]
         };
 
-        const myBarChart = new Chart(canvas, {
+        const chart = new Chart(canvas, {
             type: 'line',
             data: chartData,
             options: {

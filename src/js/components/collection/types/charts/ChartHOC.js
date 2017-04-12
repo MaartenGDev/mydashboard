@@ -7,7 +7,7 @@ class ChartHOC extends React.Component {
         super(props);
     }
     componentDidMount(){
-        const {type, labels, data} = this.props;
+        const {title, type, labels, data} = this.props;
 
         const {light, dark} = Colors.generate(data.length, true);
 
@@ -17,7 +17,7 @@ class ChartHOC extends React.Component {
             labels,
             datasets: [
                 {
-                    label: 'My Title',
+                    label: title,
                     data,
                     backgroundColor: light,
                     borderColor: dark,

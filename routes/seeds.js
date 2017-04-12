@@ -28,10 +28,12 @@ let getDataForType = function (type) {
         case 'card': {
            return [
                {
+                   image: 'https://source.unsplash.com/random',
                    title: 'My Card',
                    description: 'I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.'
                },
                {
+                   image: 'https://source.unsplash.com/random',
                    title: 'Second Card',
                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel ligula dapibus, dictum justo eget, rutrum lacus. Pellentesque condim.'
                }
@@ -39,6 +41,7 @@ let getDataForType = function (type) {
         }
         case 'chart': {
             return {
+                title: 'Hello Worlds Count',
                 labels: ["January", "February", "March", "April", "May", "June", "July"],
                 data: [65, 59, 58, 70, 56, 55, 63]
             };
