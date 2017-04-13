@@ -3,15 +3,14 @@
 # Preview
 ![ManageCollection](./assets/images/ManageCollection.gif)
 
-# Different collection types
-![different collection types](./assets/images/ImageCards.gif)
-
-# Add collection
-![Add Collection](./assets/images/AddCollection.gif)
+# Setup
+1. yarn install
+2. yarn start
 
 ## Stack
 - NodeJS
-- MySql
-- MongoDB(mongoose)
+- Express
+- Mysql
 - ReactJs
 - Redux
+- Sass
