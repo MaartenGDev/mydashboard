@@ -1,8 +1,14 @@
+import AmsterdamOpenDataApi from '../src/api/vendor/AmsterdamOpenDataApi';
 import express from 'express';
+
+
+const OpenDataApi = new AmsterdamOpenDataApi;
+
+
 const router = express.Router();
 
-let getDataForType = function (type) {
-    switch (type){
+let getDataForType = async function (type) {
+    switch (type) {
         case 'table': {
             return {
                 columns: [
@@ -17,7 +23,7 @@ let getDataForType = function (type) {
                     }
                 ],
                 rows: [
-                    ["My title", "Hello World description", 245],
+                    ["My title", "first item", 245],
                     ["My title", "Hello World description", 245],
                     ["My title", "Hello World description", 245],
                     ["My title", "Hello World description", 245],
@@ -26,18 +32,15 @@ let getDataForType = function (type) {
             };
         }
         case 'card': {
-           return [
-               {
-                   image: 'https://source.unsplash.com/random',
-                   title: 'My Card',
-                   description: 'I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.'
-               },
-               {
-                   image: 'https://source.unsplash.com/random',
-                   title: 'Second Card',
-                   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel ligula dapibus, dictum justo eget, rutrum lacus. Pellentesque condim.'
-               }
-           ];
+            const activities = await OpenDataApi.getActivities();
+
+            return activities.map(activity => {
+                return {
+                    image: activity.image,
+                    title: activity.name,
+                    description: activity.description.nl.shortdescription
+                };
+            });
         }
         case 'chart': {
             return {
@@ -62,10 +65,12 @@ let getDataForType = function (type) {
 
 };
 
-router.get('/:type', (req, res, next) => {
+router.get('/:type', async (req, res, next) => {
     const {type} = req.params;
 
-    return res.json(getDataForType(type));
+    const dataForType = await getDataForType(type);
+
+    return res.json(dataForType);
 });
 
 export default router;

@@ -5,7 +5,9 @@ const ImageCard = ({title, image, description}) => {
         <section className="collection-card collection-card--image">
             <section className="collection-card__image-wrapper">
                 <img className="collection-card__image" src={image} />
-                <h3 className="collection-card__title collection-card__title--overlay">{title}</h3>
+            </section>
+            <section className="collection-card__primary-title collection-card__primary-title--image">
+                <h1 className="collection-card__title">{title}</h1>
             </section>
             <section className="collection-card__supporting-text">
                 <p className="collection-card__text">{description}</p>
