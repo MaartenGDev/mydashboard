@@ -1,8 +1,10 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import Chart from 'chart.js';
 import Colors from '../../../../helpers/ColorGenerator';
 
-class ChartCollection extends React.Component {
+class ChartCollection extends Component {
     constructor(props){
         super(props);
     }

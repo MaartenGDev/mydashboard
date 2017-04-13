@@ -9,6 +9,10 @@ import ImageCard from '../types/cards/ImageCard';
 import LineChart from '../types/charts/LineChart';
 import BarChart from '../types/charts/BarChart';
 
+// This is a helper file and uses functions to keep the code clean.
+
+/* eslint-disable react/no-multi-comp */
+
 export default function getComponentsForCollectionType(type, collection) {
     // Charts
     const isLineChart = type === types.COLLECTION_TYPE_CHARTS_LINE;

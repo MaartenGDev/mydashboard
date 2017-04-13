@@ -1,4 +1,6 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import TextInput from '../common/TextInput';
 import NestedSelectInput from '../common/NestedSelectInput';
 

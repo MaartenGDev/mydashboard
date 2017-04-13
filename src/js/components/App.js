@@ -1,14 +1,15 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import Home from './home/HomePage';
 import About from './about/AboutPage';
 import Header from './common/Header';
 import CollectionsPage from './collection/CollectionsPage';
 import ManageCollectionPage from './collection/ManageCollectionPage';
 
-class App extends React.Component {
+class App extends Component {
     render() {
         return (
             <Router>

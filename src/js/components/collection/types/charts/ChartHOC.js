@@ -1,8 +1,10 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import Chart from 'chart.js';
 import Colors from '../../../../../helpers/ColorGenerator';
 
-class ChartHOC extends React.Component {
+class ChartHOC extends Component {
     constructor(props){
         super(props);
     }
@@ -44,6 +46,7 @@ class ChartHOC extends React.Component {
 }
 
 ChartHOC.propTypes = {
+    title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     labels: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired

@@ -1,11 +1,13 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+
 import * as collectionActions from '../../actions/collectionActions';
 import {bindActionCreators} from 'redux';
 import CollectionList from './CollectionList';
 import NoCollectionsFound from './NoCollectionsFound';
 
-class CollectionsPage extends React.Component {
+class CollectionsPage extends Component {
     constructor(props, context) {
         super(props, context);
     }

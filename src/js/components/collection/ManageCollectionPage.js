@@ -1,10 +1,12 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as collectionActions from '../../actions/collectionActions';
 import CollectionForm from './CollectionForm';
 
-class ManageCollectionPage extends React.Component {
+class ManageCollectionPage extends Component {
     constructor(props, context) {
         super(props, context);
 

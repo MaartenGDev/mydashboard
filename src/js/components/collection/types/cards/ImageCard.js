@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const ImageCard = ({title, image, description}) => {
     return (
@@ -10,7 +11,7 @@ const ImageCard = ({title, image, description}) => {
                 <h1 className="collection-card__title">{title}</h1>
             </section>
             <section className="collection-card__supporting-text">
-                <p className="collection-card__text">{description.substring(0, 230)}...</p>
+                <p className="collection-card__text">{description}</p>
             </section>
             <section className="collection-card__actions">
                 <a className="link link--material">Learn More</a>
