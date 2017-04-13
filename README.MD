@@ -1,7 +1,7 @@
 # My Dashboard
 
 # Preview
-![ManageCollection](./assets/images/ManageCollection.gif)
+![ManageCollection](./assets/images/ManageCollections.gif)
 
 # Setup
 1. yarn install
