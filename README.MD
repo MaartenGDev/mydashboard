@@ -11,6 +11,8 @@
 More info at: [Installation instructions](https://github.com/MaartenGDev/mydashboard/wiki/Installation)
 
 # Documentation
+[API Setup](https://github.com/MaartenGDev/mydashboard/wiki/API-Setup)
+
 [Basic Setup](https://github.com/MaartenGDev/mydashboard/wiki/Basic-Setup)
 
 ## Stack
