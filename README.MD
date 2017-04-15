@@ -4,17 +4,6 @@
 ![ManageCollection](docs/images/preview.gif)
 
 
-# Collections
-
-## Cards
-![Card Collection](./docs/images/collections/card.png)
-
-## Charts
-![Card Collection](./docs/images/collections/chart.png)
-
-## Table
-![Card Collection](./docs/images/collections/table.png)
-
 # Setup
 1. yarn install
 2. yarn start
@@ -24,7 +13,6 @@ More info at: [Installation instructions](https://github.com/MaartenGDev/mydashb
 # Documentation
 [Basic Setup](https://github.com/MaartenGDev/mydashboard/wiki/Basic-Setup)
 
-
 ## Stack
 - NodeJS
 - Express
@@ -32,3 +20,17 @@ More info at: [Installation instructions](https://github.com/MaartenGDev/mydashb
 - ReactJs
 - Redux
 - Sass
+
+## Example Collections
+
+### Cards
+![Card Collection](./docs/images/collections/card.png)
+
+### Charts
+![Card Collection](./docs/images/collections/chart.png)
+
+### Table
+![Card Collection](./docs/images/collections/table.png)
+
+
+
