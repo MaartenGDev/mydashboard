@@ -1,11 +1,29 @@
 # My Dashboard
 
 # Preview
-![ManageCollection](./assets/images/ManageCollections.gif)
+![ManageCollection](docs/images/preview.gif)
+
+
+# Collections
+
+## Cards
+![Card Collection](./docs/images/collections/card.png)
+
+## Charts
+![Card Collection](./docs/images/collections/chart.png)
+
+## Table
+![Card Collection](./docs/images/collections/table.png)
 
 # Setup
 1. yarn install
 2. yarn start
+
+More info at: [Installation instructions](https://github.com/MaartenGDev/mydashboard/wiki/Installation)
+
+# Documentation
+[Basic Setup](https://github.com/MaartenGDev/mydashboard/wiki/Basic-Setup)
+
 
 ## Stack
 - NodeJS

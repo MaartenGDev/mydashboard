@@ -13,40 +13,72 @@ let getDataForType = async function (type) {
             return {
                 columns: [
                     {
-                        name: "Title",
+                        name: "Title"
                     },
                     {
                         name: "Description"
                     },
                     {
                         name: "Count"
-                    }
+                    },
                 ],
                 rows: [
-                    ["My title", "first item", 245],
-                    ["My title", "Hello World description", 245],
-                    ["My title", "Hello World description", 245],
-                    ["My title", "Hello World description", 245],
-                    ["My title", "Hello World description", 245]
+                    [
+                        "First Row - Title Column",
+                        "First Row - Description Column",
+                        "First Row - Count Column"
+                    ],
+                    [
+                        "Second Row - Title Column",
+                        "Second Row - Description Column",
+                        "Second Row - Count Column"
+                    ],
+                    [
+                        "Third Row - Title Column",
+                        "Third Row - Description Column",
+                        "Third Row - Count Column"
+                    ]
                 ]
             };
         }
         case 'card': {
-            const activities = await OpenDataApi.getActivities();
-
-            return activities.map(activity => {
-                return {
-                    image: activity.image,
-                    title: activity.name,
-                    description: activity.description.nl.shortdescription
-                };
-            });
+            return [
+                {
+                    image: "https://source.unsplash.com/random",
+                    title: "My first card",
+                    description: "Torem ipsum dolor sit amet, consectetur adipiscing elit. Praesent arcu diam, maximus sed libero nec, condimentum sodales tortor. Quisque ac consequat diam. Praesent laoreet ullamcorper nunc, at molestie risus vehicula a. Pellentesque aliquam diam purus. Pellentesque in nequ"
+                },
+                {
+                    image: "https://source.unsplash.com/random",
+                    title: "My second card",
+                    description: "orem ipsum dolor sit amet, consectetur adipiscing elit. Praesent arcu diam, maximus sed libero nec, condimentum sodales tortor. Quisque ac consequat diam. Praesent laoreet ullamcorper nunc, at molestie risus vehicula a. Pellentesque aliquam diam purus. Pellentesque in nequ?"
+                },
+                {
+                    image: "https://source.unsplash.com/random?",
+                    title: "My third card",
+                    description: "orem ipsum dolor sit amet, consectetur adipiscing elit. Praesent arcu diam, maximus sed libero nec, condimentum sodales tortor. Quisque ac consequat diam. Praesent laoreet ullamcorper nunc, at molestie risus vehicula a. Pellentesque aliquam diam purus. Pellentesque in nequ"
+                }
+            ];
         }
         case 'chart': {
             return {
-                title: 'Hello Worlds Count',
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
-                data: [65, 59, 58, 70, 56, 55, 63]
+                title: "Programming Languages",
+                labels: [
+                    "JavaScript",
+                    "SQL",
+                    "Java",
+                    "C#",
+                    "Python",
+                    "PHP"
+                ],
+                data: [
+                    62,
+                    51,
+                    39,
+                    34,
+                    32,
+                    28
+                ]
             };
         }
         default:

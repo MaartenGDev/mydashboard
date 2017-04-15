@@ -115,10 +115,10 @@ body {
   position: relative; }
   .collection-card__image-wrapper {
     position: relative;
-    overflow: hidden; }
-  .collection-card__image {
-    width: 100%;
+    overflow: hidden;
     max-height: 130px; }
+  .collection-card__image {
+    width: 100%; }
   .collection-card__title {
     margin: 0;
     padding: 0;

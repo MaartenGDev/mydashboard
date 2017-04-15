@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import About from './about/AboutPage';
@@ -12,7 +12,7 @@ import ManageCollectionPage from './collection/ManageCollectionPage';
 class App extends Component {
     render() {
         return (
-            <Router>
+            <BrowserRouter>
                 <main>
                     <Header loading={this.props.loading}/>
                     <Route exact path="/" component={CollectionsPage}/>
@@ -20,7 +20,7 @@ class App extends Component {
                     <Route exact path="/collections" component={CollectionsPage}/>
                     <Route exact path="/collections/:id" component={ManageCollectionPage}/>
                 </main>
-            </Router>
+            </BrowserRouter>
         );
     }
 }

@@ -1,17 +1,42 @@
 import fetch from 'node-fetch';
+import fs from 'fs';
+import path from 'path';
 
 class AmsterdamOpenDataApi {
     getActivities() {
         return new Promise(resolve => {
-            fetch(`http://open.datapunt.amsterdam.nl/Activiteiten.json`)
-                .then(res => res.json())
-                .then(data => {
-                    resolve(this.transformActivities(data));
-                });
+            this.gatherActivities()
+                .then(activities => resolve(activities));
+
         });
     }
 
-    transformActivities(activities) {
+
+    gatherActivities() {
+        return new Promise(resolve => {
+            const cacheFile = path.join(__dirname, '../../../storage/cache/activities.json');
+
+
+            fs.readFile(cacheFile, async (err, data) => {
+                if (!err) return resolve(JSON.parse(data));
+
+                const activities = await this.fetchActivities();
+
+                const activeActivities = this.filterActivities(activities);
+
+                fs.writeFile(cacheFile, JSON.stringify(activeActivities), function (err) {
+                    return resolve(activeActivities);
+                });
+            });
+        });
+    }
+
+    fetchActivities() {
+        return fetch(`http://open.datapunt.amsterdam.nl/Activiteiten.json`)
+            .then(res => res.json());
+    }
+
+    filterActivities(activities) {
         activities = activities.filter(activity => {
             const {media, details} = activity;
 
