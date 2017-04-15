@@ -5,15 +5,13 @@
 
 
 # Setup
-1. yarn install
-2. yarn start
+1. [Install the project](https://github.com/MaartenGDev/mydashboard/wiki/Installation)
+2. [Configure the API](https://github.com/MaartenGDev/mydashboard/wiki/API-Setup)
+3. [Create your custom dashboard](https://github.com/MaartenGDev/mydashboard/wiki/Basic-Setup)
 
-More info at: [Installation instructions](https://github.com/MaartenGDev/mydashboard/wiki/Installation)
 
 # Documentation
-[API Setup](https://github.com/MaartenGDev/mydashboard/wiki/API-Setup)
-
-[Basic Setup](https://github.com/MaartenGDev/mydashboard/wiki/Basic-Setup)
+[Wiki](https://github.com/MaartenGDev/mydashboard/wiki)
 
 ## Stack
 - NodeJS
